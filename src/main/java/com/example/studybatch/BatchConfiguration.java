@@ -63,28 +63,11 @@ public class BatchConfiguration {
                 .build();
     }
 
-//    @Bean
-//    public Job masterSlaveJob(Step masterStep) {
-//        return jobBuilderFactory.get("masterSlaveJob")
-//                .incrementer(new RunIdIncrementer())
-//                .start(masterStep)
-//                .build();
-//    }
-
     @Bean
-    public Step singleStep(ItemReader<String> reader, ItemProcessor<String, WordCount> processor, ItemWriter<WordCount> writer) {
-        return stepBuilderFactory.get("singleStep")
-                .<String, WordCount>chunk(1)
-                .reader(reader)
-                .processor(processor)
-                .writer(writer)
-                .build();
-    }
-
-    @Bean
-    public Job singleJob(Step singleStep) {
-        return jobBuilderFactory.get("singleJob")
-                .start(singleStep)
+    public Job masterSlaveJob(Step masterStep) {
+        return jobBuilderFactory.get("masterSlaveJob")
+                .incrementer(new RunIdIncrementer())
+                .start(masterStep)
                 .build();
     }
 
